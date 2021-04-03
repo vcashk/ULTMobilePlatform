@@ -1,0 +1,234 @@
+UNITED LODGE OF THEOSOPHISTS MOBILE DEVICE APP
+----------------------------------------------
+
+ULT Chapter: ULT Chapters are organized by Country and City for each country. Chapter in this case refers to the location of the ULT branch in a given city
+
+Privacy Policy:
+---------------
+
+Every app needs to have a privacy policy. A privacy policy will have to be put in place to ensure compliancy of the app with the Google PlayStore and the Apple AppStore.
+
+Software architecture of the app:
+---------------------------------
+
+I was thinking of using an MVC architecture. All data models are separate, all views are separate and the logic for handling the flow of data from the model to the view is separate. However, depending on how the code is to be structured it may be such that the logic will have to be integrated with the model. I always faced a big challenge in passing the data as parameters from the model to the controller and the view. So I tend to mix up the controller functions and the model a bit to make things easier for me. Sometimes, even the model and view functions have gotten mixed up. So far, with the demo apps I have made, this is the approach I have followed, a kind of MVC but not completely MVC. I have heard of BLoC as well, but I have not done much research into it. I have heard of MVVM as well. If I understood correctly from my research, that seems to mix up the model and the views. Since, the development of the app is iterative and features will be added in the future, I want to keep the code as modular as possible for easy maintenance and scalability. If there is a better way of implementing the software architecture, let me know.
+
+Phase 1 - Functionality
+-----------------------
+
+News Feed and Events: 
+---------------------
+
+The news feed shows the latest news for a given city. News feed will be organized as a list location wise. Should there be an option for the user to set their preferred location/s? This will prevent unnecessary limitless scrolling which may be difficult for some users of the app to read through all the news. Google's policies on news feed features have changed recently to make apps more compliant with their store. Here is the link:
+
+https://support.google.com/googleplay/android-developer/answer/10355942?hl=en
+
+See the "News" section at the link. Contact information for each ULT chapter will have to be shown for the news feed. It is best to organize the news feed by preferred location/s. The news feed shows upcoming online and offline events. Online events seem to be temporary and seem to be available only because of the ongoing pandemic. Depending on geographical location and other factors such as medical conditions, all users will not be able to attend offline events. So, my recommendation is to have users set their preferred location/s. 
+
+Preferred location/s can be stored in an SQFLite database on the device locally, taking care to prevent SQL injection attacks in the local database. In any case, personal identification information is not being stored in the app, so it should not be a cause for concern. Also, permission has to be granted by the user to access the device storage for saving the database. If permission is denied, the app cannot be personalized. So, the control flow can be something like this:
+
+1. Ask user for premission
+2. if (userGivesPermission) {
+		1. Create the database
+		2. Store preferred locations in database
+		3. Depending on preferred location, display news feed and events as a list in the app
+	} else {
+		1. Inform user the app will not be personalized without permission
+		2. Use a mode where all news feed is shown as a limitless scroll
+	}
+
+Sample JSON code for news feed structuring:
+
+{
+  "Country": {
+    "City": [
+      {
+        "News Feed 1": [
+          "Date",
+          "Time"
+        ]
+      },
+      {
+        "News Feed 2": [
+          "Date",
+          "Time"
+        ]
+      },
+      {
+        "News Feed N": [
+          "Date",
+          "Time"
+        ]
+      }
+    ]
+  }
+}
+
+Sample JSON code for events structuring:
+
+{
+  "Country": {
+    "City": {
+      "Online Events": [
+        {
+          "Event 1": [
+            "Date, Time"
+          ]
+        },
+        {
+          "Event 2": [
+            "Date, Time"
+          ]
+        }
+      ],
+      "Offline Events": [
+        {
+          "Event 1": [
+            "Date, Time"
+          ]
+        },
+        {
+          "Event 2": [
+            "Date, Time"
+          ]
+        }
+      ]
+    }
+  }
+}
+
+I used the following link to verify the JSON files:
+
+https://jsoneditoronline.org/
+
+A consistent JSON structuring standard can be followed for all ULT chapters. This will make it easier for using the control panel in the backend to maintain the data and for the app to access the data. If there is a better way of structuring the data for the news feed and events, let me know.
+
+Educational Material (PDFs and Articles):
+-----------------------------------------
+
+I looked into the Google Search API. While searching using the search feature, it looks like the search picks up on everything from the site, from the articles, pamphlets, books and the magazines all as a continuous index of page wise displayed items. This is fine. However, there are many items, and again, it may be difficult for some users to search what they are looking for. For example, if the users are searching for the keyword "sun" only in magazines, why do they need to see the pamphlets? So in the JSON, the search results can also be structured something like this:
+
+{
+  "Search Results": {
+    "Magazines": [
+      {
+        "Magazine Title 1": "Published Date"
+      },
+      {
+        "Magazine Title N": "Published Date"
+      }
+    ],
+    "Articles": [
+      {
+        "Article Title 1": "Published Date"
+      },
+      {
+        "Article Title N": "Published Date"
+      }
+    ],
+    "Pamphlets": [
+      {
+        "Pamphlet Title 1": "Published Date"
+      },
+      {
+        "Pamphlet Title N": "Published Date"
+      }
+    ],
+    "Books": [
+      {
+        "Book Title 1": "Published Date"
+      },
+      {
+        "Book Title N": "Published Date"
+      }
+    ]
+  }
+}
+
+Can meta data not be included in each webpage for the URL, such that it classifies the available reading material in categories (Books, Magazines, Articles, Pamphlets)? To get maximum benefit from the Google Search AP, the meta data in a given web page should be given properly. From what I read, the search results from the API can be structured properly. For example, there could be a "class" identifier for each CSS item in the reading material resource that classifies it either as a "Book", "Article" and so on. If there is a better way of structuring the data, let me know.
+
+Bookmarking events for later use
+--------------------------------
+
+Events will be bookmarked and stored in the local SQFLite database. I don't want to use too many push notification as this may only make things difficult for the user. As per online data, anything less than 5 push notifications per week should be OK. However, mobile screens can get crowded with push notifications from different apps. How to enable actionable push notifications without crowding a user's app screen? My idea for push notifications is as follows:
+
+Push notifications should should be shown only for events lined up for a given week. For example:
+
+"Important! You have events lined up for this week from ULT. Please check your calendar in the app for upcoming events"
+
+This notification can be sent once a week. It will depend on when the events take place. For example, if the events usually take place on a weekend, a push notification can be sent in the middle of the week.
+
+The app can have a built-in calendar for bookmarking favorited events.
+
+I am in the process for determining how a built-in calendar should be implemented. An example of how a JSON can be implemented for the calendar is as follows:
+
+{
+  "Event name 1": {
+    "Chapter": [
+      "Date", "Time"
+    ]
+  },
+  "Event name N": {
+    "Chapter": [
+      "Date", "Time"
+    ]
+  }
+}
+
+There are a few packages that allow a developer to use a custom calendar. However I am not sure as to how the calendar is to be structured. Maybe, instead of using a calendar package, I can use a list to display bookmarked events using the above JSON as a template. Each item on the list can be organized as follows using a JSON:
+
+{
+  "Event name 1": {
+    "Chapter": [
+      "Date, Time",
+      "Event Link"
+    ]
+  },
+  "Event name N": {
+    "Chapter": [
+      "Date",
+      "Time",
+      "Event Link"
+    ]
+  }
+}
+
+The event link can be taken from the website's backend.
+
+Bookmarked events can be stored locally on the device in the SQFLite database.
+
+If there is a better way of structuring the data, please let me know.
+
+App UI/UX
+---------
+
+While I can work on the design of the app following basic design principles, I am not a designer.  
+
+I will need a list of the estimated percentage of users of ULT depending on their age group.
+
+Have a portion of the users from each age group been asked what features and functionality they would like to have in a ULT app?
+
+The best person to design an app for ULT is Raaghav. He has very good knowledge about user experience and will know what to do best about designing the app in such a way that it easy and aesthetically pleasing to use for across age groups, keeping in mind that some of them have medical conditions. If you want I can get you in touch with Raaghav.
+
+Should there be a dark mode for the app?
+
+Let me know what you think about these points for the UI/UX of the app.
+
+Graph QL concerns:
+------------------
+
+I do not know much about GraphQL, but from what I read, it can be a bit "expensive" for the server to handle as far as maintenance is concerned. Considering ULT is an NGO, I would like to minimize down time, cost of maintenance and load on the server. Also, it would be easier for me to implement JSON. What are your thoughts on this? There are packages that can be used to implement Graph QL. But currently, Graph QL is beyond my scope of understanding data structures.
+
+Backward compatibility concerns:
+--------------------------------
+
+There may be some problems ensuring backward compatibility with older devices. Not all packages support an older device. Anything below Android 19 will be a problem. I need to look into backward compatibility of Flutter apps in detail. I have had some problems with it for older devices and am not sure how to solve backward compatibility issues.
+
+Other challenges:
+-----------------
+
+Turn around time for the app: I am a slow learner and slow to implement code. It takes me a long time to implement functionality in an app that would take most people in software development a fraction of the time. This is due to a lack of experience of working in software development, broken knowledge and other problems which I told you over our first call on 2nd April, 2021. I am not sure 3 months is feasible enough for me, even if its just for phase 1.
+
+The 3 month turn around time for the app should also be taken into account for the UI/UX design phase of the app. The UI/UX phase itself could take a month. Also, testing for the app has to be carried out, which will take more time. I have never implemented test cases for an app before.
+
+Backend software: While this is something I will definitely learn how to implement, currently, I am not getting into it.
