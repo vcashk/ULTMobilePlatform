@@ -232,3 +232,5 @@ Turn around time for the app: I am a slow learner and slow to implement code. It
 The 3 month turn around time for the app should also be taken into account for the UI/UX design phase of the app. The UI/UX phase itself could take a month. Also, testing for the app has to be carried out, which will take more time. I have never implemented test cases for an app before.
 
 Backend software: While this is something I will definitely learn how to implement, currently, I am not getting into it.
+
+What are your thoughts on this?
