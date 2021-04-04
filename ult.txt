@@ -196,13 +196,14 @@ There are a few packages that allow a developer to use a custom calendar. Howeve
 
 {
   "Event name 1": {
-    "Chapter": [
-      "Date, Time",
+    "Chapter 1": [
+      "Date",
+      "Time",
       "Event Link"
     ]
   },
   "Event name N": {
-    "Chapter": [
+    "Chapter N": [
       "Date",
       "Time",
       "Event Link"
