@@ -8,6 +8,23 @@ Privacy Policy:
 
 Every app needs to have a privacy policy. A privacy policy will have to be put in place to ensure compliancy of the app with the Google PlayStore and the Apple AppStore.
 
+Managing user data when the app is uninstalled or devices are changed
+---------------------------------------------------------------------
+
+When the app is uninstalled, it could either be they do not want to use the app any more, or, they want their data to be available on another device,  or, are changing devices:
+
+If an app is uninstalled permanently with the user not having any intention of using the app again, a dialog box can be shown to the user asking them if they would like their bookmarked events and calendar information to be deleted as well. They should also be informed that deleting their bookmarked items cannot be undone. If the user approves that they want to uninstall the app permanently, then all bookmarked information can be deleted from the device.
+
+If the user is changing devices, then their bookmarked data can be backed up to the backend and can later be retrieved using the new device. In this case, each user can be identified by some sort of unique key containing a combination of letters, numbers and special characters. I am not sure as to what the length of each key should be to make it unique, considering there are over 25,000 users of ULT and this number will increase. This key can be used by the backend system to identify the user. However, it will not be known to the user. The user could be changing devices for two reasons, either they lost the old device or are buying a new device. If the app is removed from the device, then the key is gone for good from the device and the server will have no way of identifying the new client device.  
+
+Creating a profile is something we decided against, since it may be difficult for some aged users to manage logging in and all information on all ULT chapter websites are freely available. Either there has to be a simple UX driven way of managing account creation or some other way has to be implemented to identify who the user is to match the unique key to a user. We could keep residual data containing only the key. However, this will go against the whole idea of having data privacy and is not feasible. Besides, it is up to the user to decide if they want only their key stored or not. They will not even know what the key is and what it does. Moreover, an app should always have a complete opt-out policy that gives the user complete control over how their data has to be handled. How to solve this?
+
+Supposing the user chooses to back up their app specific data to the server, they should be informed that the app specific data is going to be backed up to server. Maybe we could have an option where the user contacts the admin via email to have their app-specific data deleted from the server
+
+Some users may want the app synced across some or all their mobile devices. What should I do in this case?
+
+What are your thoughts on this?
+
 Software architecture of the app:
 ---------------------------------
 
