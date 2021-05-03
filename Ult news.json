@@ -1,0 +1,7 @@
+{
+  "newsHeadline": "newsHeadline",
+  "newsDescription": "newsDescriprion",
+  "newsDate": "newsDateAsString",
+  "isThereALink": "bool",
+  "link": "uriLink"
+}

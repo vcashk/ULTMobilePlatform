@@ -1,0 +1,10 @@
+{
+  "eventTitle": "titleOfEvent",
+  "eventDescription": "aboutEvent",
+  "eventDate": "dateEventIsBeingHeld",
+  "eventTime": "eventTimeOnGivenDate",
+  "eventCost": "costToAttend",
+  "eventVenue": "eventVenue",
+  "eventOrganizer": "ULT Office",
+  "eventContact": "contactNumber"
+}
