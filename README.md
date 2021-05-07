@@ -30,6 +30,6 @@ __TODO__:
 [ ] News and Events: Has to be started, has been completed using dummy data.<br>
 [ ] State Management: Has to be started. Will be implemented using BLoC.<br>
 [ ] Graph QL: Has to be started. A rough implementation of JSON has been carried out.<br>
-[ ] Documentation: In progress
-[ ] Splash Screen: Has to be started
-[ ] App Icon: Has to be started
+[ ] Documentation: In progress<br>
+[ ] Splash Screen: Has to be started<br>
+[ ] App Icon: Has to be started<br>
